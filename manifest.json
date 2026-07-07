@@ -4,6 +4,27 @@
   "description": "The most simple, yet reasonably powerful notepad",
   "start_url": "/",
   "display": "standalone",
+  "lang": "en",
+  "screenshots": [
+    {
+      "src": "/screenshots/01.png",
+      "type": "image/png",
+      "sizes": "540x737",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/screenshots/02.png",
+      "type": "image/png",
+      "sizes": "540x737",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/screenshots/03.png",
+      "type": "image/png",
+      "sizes": "540x737",
+      "form_factor": "narrow"
+    }
+  ],
   "icons": [
     {
       "src": "/favicons/icon-144x144.png",
