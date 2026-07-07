@@ -1,0 +1,9 @@
+{
+  "name": "vanza-notepad",
+  "scripts": {
+    "format": "prettier . --write"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.4"
+  }
+}

@@ -1,0 +1,343 @@
+<!--
+Copyright 2026 Vanza Setia
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      The most simple, yet reasonably powerful notepad — Vanza Notepad
+    </title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        -moz-text-size-adjust: none;
+        -webkit-text-size-adjust: none;
+        text-size-adjust: none;
+      }
+
+      body,
+      h1,
+      h2,
+      h3,
+      h4,
+      p,
+      figure,
+      blockquote,
+      dl,
+      dd {
+        margin-block-end: 0;
+      }
+
+      ul[role="list"],
+      ol[role="list"] {
+        list-style: none;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      button,
+      input,
+      label {
+        line-height: 1.1;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        text-wrap: balance;
+      }
+
+      a:not([class]) {
+        text-decoration-skip-ink: auto;
+        color: currentColor;
+      }
+
+      img,
+      picture {
+        max-width: 100%;
+        display: block;
+      }
+
+      input,
+      button,
+      textarea,
+      select {
+        font-family: inherit;
+        font-size: inherit;
+      }
+
+      textarea:not([rows]) {
+        min-height: 10em;
+      }
+
+      :target {
+        scroll-margin-block: 5ex;
+      }
+
+      :root {
+        /* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1350,24,1.25,10,3,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+        /* Step -3: 9.2593px → 12.288px */
+        --size-step--3: clamp(0.5787rem, 0.5199rem + 0.2941vw, 0.768rem);
+        /* Step -2: 11.1111px → 15.36px */
+        --size-step--2: clamp(0.6944rem, 0.6119rem + 0.4125vw, 0.96rem);
+        /* Step -1: 13.3333px → 19.2px */
+        --size-step--1: clamp(0.8333rem, 0.7194rem + 0.5696vw, 1.2rem);
+        /* Step 0: 16px → 24px */
+        --size-step-0: clamp(1rem, 0.8447rem + 0.7767vw, 1.5rem);
+        /* Step 1: 19.2px → 30px */
+        --size-step-1: clamp(1.2rem, 0.9903rem + 1.0485vw, 1.875rem);
+        /* Step 2: 23.04px → 37.5px */
+        --size-step-2: clamp(1.44rem, 1.1592rem + 1.4039vw, 2.3438rem);
+        /* Step 3: 27.648px → 46.875px */
+        --size-step-3: clamp(1.728rem, 1.3547rem + 1.8667vw, 2.9297rem);
+        /* Step 4: 33.1776px → 58.5938px */
+        --size-step-4: clamp(2.0736rem, 1.5801rem + 2.4676vw, 3.6621rem);
+        /* Step 5: 39.8131px → 73.2422px */
+        --size-step-5: clamp(2.4883rem, 1.8392rem + 3.2455vw, 4.5776rem);
+        /* Step 6: 47.7757px → 91.5527px */
+        --size-step-6: clamp(2.986rem, 2.1359rem + 4.2502vw, 5.722rem);
+        /* Step 7: 57.3309px → 114.4409px */
+        --size-step-7: clamp(3.5832rem, 2.4742rem + 5.5447vw, 7.1526rem);
+        /* Step 8: 68.7971px → 143.0511px */
+        --size-step-8: clamp(4.2998rem, 2.858rem + 7.2091vw, 8.9407rem);
+        /* Step 9: 82.5565px → 178.8139px */
+        --size-step-9: clamp(5.1598rem, 3.2907rem + 9.3454vw, 11.1759rem);
+        /* Step 10: 99.0678px → 223.5174px */
+        --size-step-10: clamp(6.1917rem, 3.7752rem + 12.0825vw, 13.9698rem);
+
+        /* @link https://utopia.fyi/space/calculator?c=320,16,1.2,1350,24,1.25,10,3,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+        /* Space 3xs: 4px → 6px */
+        --space-3xs: clamp(0.25rem, 0.2112rem + 0.1942vw, 0.375rem);
+        /* Space 2xs: 8px → 12px */
+        --space-2xs: clamp(0.5rem, 0.4223rem + 0.3883vw, 0.75rem);
+        /* Space xs: 12px → 18px */
+        --space-xs: clamp(0.75rem, 0.6335rem + 0.5825vw, 1.125rem);
+        /* Space s: 16px → 24px */
+        --space-s: clamp(1rem, 0.8447rem + 0.7767vw, 1.5rem);
+        /* Space m: 24px → 36px */
+        --space-m: clamp(1.5rem, 1.267rem + 1.165vw, 2.25rem);
+        /* Space l: 32px → 48px */
+        --space-l: clamp(2rem, 1.6893rem + 1.5534vw, 3rem);
+        /* Space xl: 48px → 72px */
+        --space-xl: clamp(3rem, 2.534rem + 2.3301vw, 4.5rem);
+        /* Space 2xl: 64px → 96px */
+        --space-2xl: clamp(4rem, 3.3786rem + 3.1068vw, 6rem);
+        /* Space 3xl: 96px → 144px */
+        --space-3xl: clamp(6rem, 5.068rem + 4.6602vw, 9rem);
+
+        /* One-up pairs */
+        /* Space 3xs-2xs: 4px → 12px */
+        --space-3xs-2xs: clamp(0.25rem, 0.0947rem + 0.7767vw, 0.75rem);
+        /* Space 2xs-xs: 8px → 18px */
+        --space-2xs-xs: clamp(0.5rem, 0.3058rem + 0.9709vw, 1.125rem);
+        /* Space xs-s: 12px → 24px */
+        --space-xs-s: clamp(0.75rem, 0.517rem + 1.165vw, 1.5rem);
+        /* Space s-m: 16px → 36px */
+        --space-s-m: clamp(1rem, 0.6117rem + 1.9417vw, 2.25rem);
+        /* Space m-l: 24px → 48px */
+        --space-m-l: clamp(1.5rem, 1.034rem + 2.3301vw, 3rem);
+        /* Space l-xl: 32px → 72px */
+        --space-l-xl: clamp(2rem, 1.2233rem + 3.8835vw, 4.5rem);
+        /* Space xl-2xl: 48px → 96px */
+        --space-xl-2xl: clamp(3rem, 2.068rem + 4.6602vw, 6rem);
+        /* Space 2xl-3xl: 64px → 144px */
+        --space-2xl-3xl: clamp(4rem, 2.4466rem + 7.767vw, 9rem);
+
+        /* Custom pairs */
+        /* Space s-l: 16px → 48px */
+        --space-s-l: clamp(1rem, 0.3786rem + 3.1068vw, 3rem);
+        --color-dark: #1e1e1e;
+        --color-light: #eee;
+        --color-body-background: var(--color-light);
+        --color-body-text: var(--color-dark);
+        --font-monospace:
+          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+        --font-base: var(--font-monospace);
+        --text-size-base: var(--size-step-1);
+        --kerning: normal;
+        --leading: 1.45;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --color-body-background: var(--color-dark);
+          --color-body-text: var(--color-light);
+        }
+      }
+
+      body {
+        background: var(--color-body-background);
+        color: var(--color-body-text);
+        font-family: var(--font-base);
+        font-size: var(--text-size-base);
+        font-size-adjust: from-font;
+        letter-spacing: var(--kerning);
+        line-height: var(--leading);
+        margin: 0;
+        padding-block: var(--space-s);
+      }
+
+      footer {
+        font-size: 1rem;
+      }
+
+      footer p {
+        max-width: 65ch;
+      }
+
+      .container {
+        max-width: 90rem;
+        margin-inline: auto;
+        padding-inline-start: var(--space-xs-s);
+        position: relative;
+        padding-inline-end: var(--space-xs-s);
+      }
+
+      label {
+        display: block;
+        font-family: var(--font-base);
+        font-size: var(--size-step-1);
+        font-weight: 400;
+        letter-spacing: normal;
+        line-height: var(--leading);
+        text-transform: none;
+        opacity: 0.9;
+      }
+
+      textarea {
+        background-color: var(--color-body-background);
+        color: var(--color-body-text);
+        border: 1.5px solid var(--color-body-text);
+        padding: var(--space-2xs) var(--space-s);
+        width: 100%;
+        resize: none;
+        min-height: 38rem;
+        display: block;
+        line-height: 1.7;
+      }
+
+      textarea:focus {
+        outline: 1.5px solid var(--color-body-text);
+        outline-offset: -0.5rem;
+      }
+
+      .visually-hidden {
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: auto;
+        margin: 0;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <header role="banner" class="visually-hidden">
+      <h1>Jotter</h1>
+    </header>
+    <main tabindex="-1">
+      <div class="notepad">
+        <div class="container">
+          <div>
+            <label for="notepad">How do you improve yourself now?</label>
+            <textarea rows="10" id="notepad" name="notepad"></textarea>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="container">
+        <p>
+          Vanza Notepad is distributed under the terms of the Apache License,
+          Version 2.0. It is a project by
+          <a href="https://vanzasetia.xyz/">Vanza Setia</a>.
+        </p>
+      </div>
+    </footer>
+    <script>
+      ((d, w) => {
+        const STORAGE_KEY = "notepad-text";
+        const notepad = d.querySelector("textarea");
+
+        notepad.value = localStorage.getItem(STORAGE_KEY) ?? "";
+
+        notepad.addEventListener("input", () => {
+          localStorage.setItem(STORAGE_KEY, notepad.value);
+        });
+
+        w.addEventListener("storage", (e) => {
+          const { isTrusted } = e;
+
+          if (isTrusted) {
+            notepad.value = localStorage.getItem(STORAGE_KEY) ?? "";
+          } else {
+            return;
+          }
+        });
+
+        const registerServiceWorker = async () => {
+          if ("serviceWorker" in navigator) {
+            try {
+              const registration = await navigator.serviceWorker.register(
+                "/sw.js",
+                {
+                  scope: "/"
+                }
+              );
+              if (registration.installing) {
+                console.log("Service worker installing");
+              } else if (registration.waiting) {
+                console.log("Service worker installed");
+              } else if (registration.active) {
+                console.log("Service worker active");
+              }
+            } catch (error) {
+              console.error(`Registration failed with ${error}`);
+            }
+          }
+        };
+
+        const hostname = window.location.hostname;
+        const isLocalhost =
+          hostname === "localhost" || hostname === "127.0.0.1";
+        const isLocalNetwork =
+          hostname.startsWith("192.168.") || hostname.startsWith("10.");
+
+        if (isLocalhost || isLocalNetwork) {
+          console.log(
+            "Service Worker registration skipped on localhost/local network",
+            "info"
+          );
+          return false;
+        } else {
+          registerServiceWorker();
+        }
+      })(document, window);
+    </script>
+  </body>
+</html>
