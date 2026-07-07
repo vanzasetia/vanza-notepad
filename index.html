@@ -178,6 +178,10 @@ limitations under the License.
         --text-size-base: var(--size-step-1);
         --kerning: normal;
         --leading: 1.45;
+        --focus-ring-color: currentColor;
+        --focus-ring-offset: 0.25lh;
+        --focus-ring-style: solid;
+        --focus-ring-width: 2px;
       }
 
       @media (prefers-color-scheme: dark) {
@@ -185,6 +189,36 @@ limitations under the License.
           --color-body-background: var(--color-dark);
           --color-body-text: var(--color-light);
         }
+      }
+
+      :focus {
+        outline-color: var(--focus-ring-color);
+        outline-offset: var(--focus-ring-offset);
+        outline-style: var(--focus-ring-style);
+        outline-width: var(--focus-ring-width);
+      }
+
+      @supports selector(:focus-visible) {
+        :focus {
+          outline: none;
+        }
+        :focus-visible {
+          outline-color: var(--focus-ring-color);
+          outline-offset: var(--focus-ring-offset);
+          outline-style: var(--focus-ring-style);
+          outline-width: var(--focus-ring-width);
+        }
+      }
+
+      @supports (-moz-appearance: none) {
+        :root {
+          --focus-ring-offset: 0.2ex;
+        }
+      }
+
+      :is([tabindex="-1"]):focus,
+      :is([tabindex="-1"]):focus-visible {
+        outline: none;
       }
 
       body {
