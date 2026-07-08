@@ -1,5 +1,7 @@
 # Vanza Notepad
 
+![Vanza Notepad. The most simple, yet reasonably powerful notepad.](./social-share.png)
+
 Vanza Notepad is a part of Tiny Project made by me, Vanza Setia. This notepad is for everybody who understands "tiny but mighty" and appreciates independent developers. Please think about this carefully.
 
 The purpose of this project is not to showcase hard skills, but rather to appreciate how few lines of code are helpful for _real_ human beings.
